@@ -6,6 +6,6 @@ So I can track my finances
 
 Scenario: Create a new account
 
-Given As an user
+Given a new account with name TEST-ACCOUNT with currency ARS
 When I create a new account
 Then the account is created

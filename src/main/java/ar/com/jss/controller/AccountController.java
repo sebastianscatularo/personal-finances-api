@@ -42,8 +42,8 @@ public class AccountController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Resource<Account>> newAccount() {
-        Resource<Account> resource = accountDataAccess.create(new Account());
+    public ResponseEntity<Resource<Account>> newAccount(@RequestBody Account account) {
+        Resource<Account> resource = accountDataAccess.create(account);
         URI uri = URI.create(resource.getId().getHref());
         return ResponseEntity.created(uri).body(resource);
     }
