@@ -30,7 +30,7 @@ public class AccountController {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<Collection<Resource<Account>>> accounts() {
+    public ResponseEntity<Collection<Resource<Account>>> accounts(@PathVariable("account") long user) {
         Collection<Resource<Account>> resources = accountDataAccess.read();
         return ResponseEntity.ok(resources);
     }
