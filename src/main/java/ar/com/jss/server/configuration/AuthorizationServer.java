@@ -17,17 +17,22 @@ import org.springframework.security.oauth2.provider.token.TokenStore;
 @EnableAuthorizationServer
 public class AuthorizationServer extends AuthorizationServerConfigurerAdapter {
 
-    private final AuthenticationManager authenticationManager;
-    private final UserDetailsService userDetailsService;
-    private final TokenStore tokenStore;
+    private AuthenticationManager authenticationManager;
+    private UserDetailsService userDetailsService;
+    private TokenStore tokenStore;
 
     @Autowired
-    public AuthorizationServer(AuthenticationManager authenticationManager,
-                               UserDetailsService userDetailsService,
-                               TokenStore tokenStore
-    ) {
+    public void setAuthenticationManager(AuthenticationManager authenticationManager) {
         this.authenticationManager = authenticationManager;
+    }
+
+    @Autowired
+    public void setUserDetailsService(UserDetailsService userDetailsService) {
         this.userDetailsService = userDetailsService;
+    }
+
+    @Autowired
+    public void setTokenStore(TokenStore tokenStore) {
         this.tokenStore = tokenStore;
     }
 

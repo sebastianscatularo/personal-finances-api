@@ -1,6 +1,6 @@
 package ar.com.jss.server.configuration;
 
-import ar.com.jss.service.CustomerDetailsService;
+import ar.com.jss.service.authorization.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,7 +10,6 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.servlet.configuration.EnableWebMvcSecurity;
-import org.springframework.security.core.token.TokenService;
 import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
@@ -23,16 +22,16 @@ import org.springframework.security.oauth2.provider.token.store.InMemoryTokenSto
 @EnableWebMvcSecurity
 public class SecurityServerConfiguration extends WebSecurityConfigurerAdapter {
     public static final String RESOURCE_ID = "restservice";
-    private final CustomerDetailsService customerDetailsService;
+    private UserDetailsServiceImpl userDetailsServiceImpl;
 
     @Autowired
-    public SecurityServerConfiguration(CustomerDetailsService customerDetailsService) {
-        this.customerDetailsService = customerDetailsService;
+    public void setUserDetailsServiceImpl(UserDetailsServiceImpl userDetailsServiceImpl) {
+        this.userDetailsServiceImpl = userDetailsServiceImpl;
     }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(customerDetailsService);
+        auth.userDetailsService(userDetailsServiceImpl);
     }
 
     @Bean
