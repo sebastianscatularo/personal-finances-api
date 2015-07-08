@@ -18,12 +18,12 @@ import java.util.HashSet;
  * id, name
  */
 @Entity
-@Table(name = "role")
+@Table(name = "ROLES")
 public class RoleEntity implements GrantedAuthority {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @Column(name = "name")
+    @Column(name = "NAME")
     private String name;
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "roles")
     private Collection<UserEntity> users = new HashSet<>();

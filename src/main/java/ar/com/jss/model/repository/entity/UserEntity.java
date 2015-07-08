@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import java.util.Collection;
 import java.util.HashSet;
@@ -20,20 +21,23 @@ import java.util.HashSet;
  * id, name, login, password
  */
 @Entity
-@Table(name = "user")
+@Table(name = "USERS")
 public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "user_role", joinColumns = {@JoinColumn(name = "user_id")}, inverseJoinColumns = {@JoinColumn(name = "role_id")})
+    @JoinTable(name = "USER_ROLE",
+            joinColumns = {@JoinColumn(name = "USER_ID")},
+            inverseJoinColumns = {@JoinColumn(name = "ROLE_ID")}
+    )
     private Collection<RoleEntity> roles = new HashSet<>();
-    @Column(name = "login", unique = true, nullable = false)
+    @Column(name = "LOGIN", unique = true, nullable = false)
     private String login;
-    @Column(name = "password")
+    @Column(name = "PASSWORD")
     private String password;
-    @Column(name = "name")
-    private String username;
+    @OneToOne
+    private ProfileEntity profile;
 
     public Long getId() {
         return id;
@@ -67,11 +71,11 @@ public class UserEntity {
         this.password = password;
     }
 
-    public String getUsername() {
-        return username;
+    public ProfileEntity getProfile() {
+        return profile;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setProfile(ProfileEntity profile) {
+        this.profile = profile;
     }
 }

@@ -2,7 +2,6 @@ package ar.com.jss.service.authorization;
 
 import ar.com.jss.model.repository.entity.RoleEntity;
 import ar.com.jss.model.repository.entity.UserEntity;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
@@ -29,7 +28,7 @@ final class InternalUserDetails implements UserDetails {
 
     @Override
     public String getUsername() {
-        return userEntity.getUsername();
+        return userEntity.getProfile().getFirstName();
     }
 
     @Override

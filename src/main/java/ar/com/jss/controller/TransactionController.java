@@ -17,7 +17,7 @@ import java.util.Collection;
  * @author sebastianscatularo@gmail.com.
  */
 @RestController
-@RequestMapping("/accounts/{account}/transactions")
+@RequestMapping(Path.TRANSACTION)
 public class TransactionController {
     private final TransactionDataAccess transactionDataAccess;
 

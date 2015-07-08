@@ -20,7 +20,7 @@ import java.util.Collection;
  * @author sebastianscatularo@gmail.com.
  */
 @RestController
-@RequestMapping("/accounts")
+@RequestMapping(Path.ACCOUNT)
 public class AccountController {
     private final AccountDataAccess accountDataAccess;
 
