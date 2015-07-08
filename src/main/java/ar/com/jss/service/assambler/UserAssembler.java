@@ -1,9 +1,18 @@
 package ar.com.jss.service.assambler;
 
+import ar.com.jss.controller.AccountController;
 import ar.com.jss.model.domain.User;
+import org.springframework.hateoas.Link;
+import org.springframework.hateoas.Links;
 import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.ResourceAssembler;
 import org.springframework.stereotype.Service;
+
+import java.util.Collection;
+import java.util.HashSet;
+
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
 /**
  * @author sebastianscatularo@gmail.com.
@@ -18,6 +27,8 @@ public class UserAssembler implements ResourceAssembler<User, Resource<User>> {
      */
     @Override
     public Resource<User> toResource(User entity) {
-        return new Resource<>(entity);
+        Resource<User> user = new Resource<>(entity);
+        user.add(linkTo(methodOn(AccountController.class).accounts(entity.getId())).withRel("accounts"));
+        return user;
     }
 }

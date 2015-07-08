@@ -31,4 +31,13 @@ public class UserDataAccessImpl implements UserDataAccess {
         UserEntity userEntity = (UserEntity) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return asList(assembler.toResource(userEntity.toUser()));
     }
+
+    @Override
+    public Resource<User> getUser(long user) {
+        UserEntity userEntity = (UserEntity) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (user == userEntity.getId()) {
+            return assembler.toResource(userEntity.toUser());
+        }
+        throw new IllegalStateException();
+    }
 }

@@ -10,4 +10,6 @@ import java.util.Collection;
  */
 public interface UserDataAccess {
     Collection<Resource<User>> getUsers();
+
+    Resource<User> getUser(long user);
 }
