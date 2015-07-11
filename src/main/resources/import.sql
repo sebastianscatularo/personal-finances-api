@@ -1,10 +1,10 @@
-insert into profiles(id, first_name) values (1,"User");
-insert into profiles(id, first_name) values (2,"Admin");
-insert into profiles(id, first_name) values (3,"Guest");
+insert into profiles(id, first_name) values (1,'User');
+insert into profiles(id, first_name) values (2,'Admin');
+insert into profiles(id, first_name) values (3,'Guest');
 
-insert into users(id, profile_id, login, password) values (1, 1,'sebastianscatularo@gmail.com','spring');
-insert into users(id, profile_id, login, password) values (2, 2,'sebastianscatularo@gmail.com','spring');
-insert into users(id, profile_id, login, password) values (3, 3,'sebastianscatularo@gmail.com','spring');
+insert into users(id, profile_id, login, password) values (1, 1,'sebastian@test.com','spring');
+insert into users(id, profile_id, login, password) values (2, 2,'juan@test.com','spring');
+insert into users(id, profile_id, login, password) values (3, 3,'melina@test.com','spring');
 
 insert into roles(id, name) values (1,'ROLE_USER');
 insert into roles(id, name) values (2,'ROLE_ADMIN');
