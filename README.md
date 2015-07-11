@@ -3,6 +3,7 @@ A simple RESTful service to storage personal finances information using jbehave 
 
 # TODO List
 
+* Add oauth support
 * Add bdd support
 * Add validation
 * Add add total amount to each acount
