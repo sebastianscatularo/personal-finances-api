@@ -1,6 +1,7 @@
 package ar.com.jss.model.repository.entity;
 
 import ar.com.jss.model.domain.Account;
+import ar.com.jss.model.domain.AccountResource;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -65,19 +66,11 @@ public class AccountEntity {
         this.transactions = transactions;
     }
 
-    public static AccountEntity from(Account account) {
+    public static AccountEntity from(long accountId, AccountResource account) {
         AccountEntity entity = new AccountEntity();
-        entity.setId(account.getId());
+        entity.setId(accountId);
         entity.setName(account.getName());
         entity.setCurrency(account.getCurrency());
         return entity;
-    }
-
-    public Account toAccount() {
-        Account account = new Account();
-        account.setId(getId());
-        account.setName(getName());
-        account.setCurrency(getCurrency());
-        return account;
     }
 }

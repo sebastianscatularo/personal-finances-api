@@ -50,6 +50,6 @@ public class AccountResource extends HttpResource {
         assertThat(collection.length, is(1));
         assertThat(collection[0].getName(), is(get("accountName")));
         assertThat(collection[0].getCurrency().getCurrencyCode(), is(get("currency")));
-        assertThat(collection[0].getAmount(), is(BigDecimal.ZERO));
+        assertThat(collection[0].getAmount(), is(new BigDecimal("0.00")));
     }
 }

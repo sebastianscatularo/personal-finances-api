@@ -2,6 +2,7 @@ package ar.com.jss.controller;
 
 import ar.com.jss.model.domain.Account;
 
+import ar.com.jss.model.domain.AccountResource;
 import ar.com.jss.service.data_access.AccountDataAccess;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Resource;
@@ -19,6 +20,7 @@ import java.util.Collection;
  * @author sebastianscatularo@gmail.com.
  */
 @RestController
+@RequestMapping(Path.ACCOUNTS)
 public class AccountController {
     private final AccountDataAccess accountDataAccess;
 
@@ -27,44 +29,43 @@ public class AccountController {
         this.accountDataAccess = accountDataAccess;
     }
 
-    @RequestMapping(value = Path.ACCOUNTS, method = RequestMethod.GET)
-    public ResponseEntity<Collection<Resource<Account>>> accounts(
+    @RequestMapping(method = RequestMethod.GET)
+    public ResponseEntity<Collection<AccountResource>> accounts(
             @PathVariable("user") long userId
     ) {
-        Collection<Resource<Account>> resources = accountDataAccess.read(userId);
+        Collection<AccountResource> resources = accountDataAccess.read(userId);
         return ResponseEntity.ok(resources);
     }
 
-    @RequestMapping(value = Path.ACCOUNTS + "/{account}", method = RequestMethod.GET)
-    public ResponseEntity<Resource<Account>> account(
+    @RequestMapping(value = "/{account}", method = RequestMethod.GET)
+    public ResponseEntity<AccountResource> account(
             @PathVariable("user") long userId,
             @PathVariable("account") long accountId
     ) {
-        Resource<Account> resource = accountDataAccess.read(userId, accountId);
+        AccountResource resource = accountDataAccess.read(userId, accountId);
         return ResponseEntity.ok(resource);
     }
 
-    @RequestMapping(value = Path.ACCOUNTS, method = RequestMethod.POST)
-    public ResponseEntity<Resource<Account>> newAccount(
+    @RequestMapping(method = RequestMethod.POST)
+    public ResponseEntity<AccountResource> newAccount(
             @PathVariable("user") long userId,
-            @RequestBody Account accountId) {
-        Resource<Account> resource = accountDataAccess.create(userId, accountId);
+            @RequestBody AccountResource accountId) {
+        AccountResource resource = accountDataAccess.create(userId, accountId);
         URI uri = URI.create(resource.getId().getHref());
         return ResponseEntity.created(uri).body(resource);
     }
 
-    @RequestMapping(value = Path.ACCOUNTS + "/{account}", method = RequestMethod.PUT)
-    public ResponseEntity<Resource<Account>> updateAccount(
+    @RequestMapping(value = "/{account}", method = RequestMethod.PUT)
+    public ResponseEntity<AccountResource> updateAccount(
             @PathVariable("user") long userId,
             @PathVariable("account") long accountId,
-            @RequestBody Account account
+            @RequestBody AccountResource account
     ) {
-        account.setId(accountId);
-        Resource<Account> resource = accountDataAccess.update(account);
+        AccountResource resource = accountDataAccess.update(accountId, account);
         return ResponseEntity.ok(resource);
     }
 
-    @RequestMapping(value = Path.ACCOUNTS + "/{account}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/{account}", method = RequestMethod.DELETE)
     public ResponseEntity<Void> deleteAccount(
             @PathVariable("user") long userId,
             @PathVariable("account") long accountId) {

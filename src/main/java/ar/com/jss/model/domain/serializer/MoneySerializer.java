@@ -15,6 +15,6 @@ public class MoneySerializer extends JsonSerializer<BigDecimal> {
 
     @Override
     public void serialize(BigDecimal bigDecimal, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException, JsonProcessingException {
-        jsonGenerator.writeString(bigDecimal.setScale(2, BigDecimal.ROUND_HALF_UP).toString());
+        jsonGenerator.writeString(bigDecimal.setScale(2, BigDecimal.ROUND_HALF_DOWN).toString());
     }
 }
