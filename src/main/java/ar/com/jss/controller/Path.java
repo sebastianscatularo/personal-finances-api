@@ -7,9 +7,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
  * @author sebastianscatularo@gmail.com.
  */
 final class Path {
-    public static final String USER = "/users";
-    public static final String ACCOUNT     = "/users/{user}/accounts";
-    public static final String TRANSACTION = "/users/{user}/accounts/{account}/transactions";
+    public static final String USERS = "/users";
+    public static final String ACCOUNTS     = "/users/{user}/accounts";
+    public static final String TRANSACTIONS = "/users/{user}/accounts/{account}/transactions";
     private Path() {
     }
 }

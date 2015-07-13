@@ -1,13 +1,10 @@
 package ar.com.jss.service.data_access;
 
-import ar.com.jss.model.domain.User;
-import ar.com.jss.model.repository.UserRepository;
+import ar.com.jss.model.domain.UserResource;
 import ar.com.jss.model.repository.entity.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.hateoas.Resource;
-import org.springframework.hateoas.ResourceAssembler;
+import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -19,24 +16,24 @@ import static java.util.Arrays.asList;
  */
 @Service
 public class UserDataAccessImpl implements UserDataAccess {
-    private final ResourceAssembler<User, Resource<User>> assembler;
+    private final ResourceAssemblerSupport<UserEntity, UserResource> assembler;
 
     @Autowired
-    public UserDataAccessImpl(ResourceAssembler<User, Resource<User>> assembler) {
+    public UserDataAccessImpl(ResourceAssemblerSupport<UserEntity, UserResource> assembler) {
         this.assembler = assembler;
     }
 
     @Override
-    public Collection<Resource<User>> getUsers() {
+    public Collection<UserResource> getUsers() {
         UserEntity userEntity = (UserEntity) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        return asList(assembler.toResource(userEntity.toUser()));
+        return asList(assembler.toResource(userEntity));
     }
 
     @Override
-    public Resource<User> getUser(long user) {
+    public UserResource getUser(long user) {
         UserEntity userEntity = (UserEntity) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (user == userEntity.getId()) {
-            return assembler.toResource(userEntity.toUser());
+            return assembler.toResource(userEntity);
         }
         throw new IllegalStateException();
     }

@@ -31,7 +31,7 @@ public class AccountDataAccessImpl implements AccountDataAccess {
         this.aLong = new AtomicLong(repository.count());
     }
     @Override
-    public Collection<Resource<Account>> read() {
+    public Collection<Resource<Account>> read(long user) {
         Collection<Resource<Account>> resources = from(repository.findAll()).transform(new Function<AccountEntity, Resource<Account>>() {
             @Override
             public Resource<Account> apply(AccountEntity input) {
@@ -42,7 +42,7 @@ public class AccountDataAccessImpl implements AccountDataAccess {
     }
 
     @Override
-    public Resource<Account> read(long account) {
+    public Resource<Account> read(long user, long account) {
         AccountEntity accountEntity = repository.findOne(account);
         Resource<Account> resource = assembler.toResource(accountEntity.toAccount());
         return resource;

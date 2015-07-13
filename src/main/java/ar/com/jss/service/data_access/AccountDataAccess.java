@@ -9,9 +9,9 @@ import java.util.Collection;
  * @author sebastianscatularo@gmail.com.
  */
 public interface AccountDataAccess {
-    Collection<Resource<Account>> read();
+    Collection<Resource<Account>> read(long user);
 
-    Resource<Account> read(long account);
+    Resource<Account> read(long user, long account);
 
     Resource<Account> create(long user, Account account);
 

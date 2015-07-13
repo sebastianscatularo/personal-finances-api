@@ -1,6 +1,7 @@
 package ar.com.jss.service.data_access;
 
 import ar.com.jss.model.domain.User;
+import ar.com.jss.model.domain.UserResource;
 import org.springframework.hateoas.Resource;
 
 import java.util.Collection;
@@ -9,7 +10,6 @@ import java.util.Collection;
  * @author sebastianscatularo@gmail.com.
  */
 public interface UserDataAccess {
-    Collection<Resource<User>> getUsers();
-
-    Resource<User> getUser(long user);
+    Collection<UserResource> getUsers();
+    UserResource getUser(long user);
 }
