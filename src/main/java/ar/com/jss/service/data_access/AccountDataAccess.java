@@ -13,7 +13,7 @@ public interface AccountDataAccess {
 
     Resource<Account> read(long account);
 
-    Resource<Account> create(Account account);
+    Resource<Account> create(long user, Account account);
 
     Resource<Account> update(Account account);
 

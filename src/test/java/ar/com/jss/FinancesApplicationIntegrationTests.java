@@ -12,6 +12,7 @@ import org.jbehave.core.junit.AnnotatedEmbedderRunner;
 import org.jbehave.core.reporters.StoryReporterBuilder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.security.oauth2.client.token.grant.password.ResourceOwnerPasswordResourceDetails;
 
 import java.util.List;
 
@@ -30,7 +31,7 @@ public class FinancesApplicationIntegrationTests extends InjectableEmbedder {
 
     @Test
     public void run() {
-        System.setProperty("logging.level.","TRACE");
+        //System.setProperty("logging.level.","TRACE");
         FinancesApplication.main(new String[]{""});
         List<String> storyPaths = new StoryFinder().findPaths(codeLocationFromClass(this.getClass()), "**/*.story", "");
         injectedEmbedder().runStoriesAsPaths(storyPaths);

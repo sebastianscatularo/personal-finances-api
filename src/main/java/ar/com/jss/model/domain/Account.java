@@ -16,6 +16,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Currency;
 import java.util.HashSet;
@@ -25,13 +26,13 @@ import java.util.Set;
  * @author sebastianscatularo@gmail.com.
  */
 public class Account implements Serializable {
-
     @JsonIgnore
     private Long id;
     private String name;
     @JsonSerialize(using = CurrencySerializer.class)
     @JsonDeserialize(using = CurrencyDeserializer.class)
     private Currency currency;
+    private BigDecimal amount = BigDecimal.ZERO;
 
     public Long getId() {
         return id;
@@ -55,5 +56,13 @@ public class Account implements Serializable {
 
     public void setCurrency(Currency currency) {
         this.currency = currency;
+    }
+
+    public BigDecimal getAmount() {
+        return amount;
+    }
+
+    public void setAmount(BigDecimal amount) {
+        this.amount = amount;
     }
 }

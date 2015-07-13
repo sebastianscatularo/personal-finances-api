@@ -10,6 +10,8 @@ import org.springframework.hateoas.Resource;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicLong;
 
 import static com.google.common.collect.FluentIterable.from;
 
@@ -18,7 +20,7 @@ import static com.google.common.collect.FluentIterable.from;
  */
 @Service
 public class AccountDataAccessImpl implements AccountDataAccess {
-
+    private final AtomicLong aLong;
     private final AccountAssembler assembler;
     private final AccountRepository repository;
 
@@ -26,6 +28,7 @@ public class AccountDataAccessImpl implements AccountDataAccess {
     public AccountDataAccessImpl(AccountRepository repository, AccountAssembler assembler) {
         this.repository = repository;
         this.assembler = assembler;
+        this.aLong = new AtomicLong(repository.count());
     }
     @Override
     public Collection<Resource<Account>> read() {
@@ -46,8 +49,8 @@ public class AccountDataAccessImpl implements AccountDataAccess {
     }
 
     @Override
-    public Resource<Account> create(Account account) {
-        account.setId(repository.count() + 1);
+    public Resource<Account> create(long user, Account account) {
+        account.setId(aLong.incrementAndGet());
         Resource<Account> resource = assembler.toResource(account);
         return resource;
     }
